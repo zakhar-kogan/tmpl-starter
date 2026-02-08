@@ -47,6 +47,13 @@ Otherwise:
 2. `/.agent/WORKFLOW.md`: full execution + capture behavior.
 3. `README.md`: onboarding and mode usage.
 
+## Harness-agnostic policy boundary
+1. Core workflow/policies stay in `AGENTS.md` and `/.agent/*`.
+2. Harness-specific behavior belongs in adapter docs/scripts, not core policy text.
+
+## References
+1. `codex-starter` (attribution for portable behavior patterns): https://github.com/Skarian/codex-starter
+
 ## Script Usage
 ```bash
 # template repository maintenance

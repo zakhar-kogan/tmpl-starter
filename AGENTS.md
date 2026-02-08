@@ -25,6 +25,33 @@
 8. For common/commodity functionality, evaluate existing libraries before building from scratch.
 9. Do not install host-level packages unless explicitly requested by the user.
 
+## Discussion protocol (numbered findings -> agreement -> execution)
+1. When presenting findings (risks, assumptions, tradeoffs, questions, proposed changes), use a numbered list.
+2. Keep numbering stable across follow-ups so decisions map 1:1 to items.
+3. For substantial tasks, do not begin execution until numbered items are resolved.
+4. Read-only exploration is allowed before agreement.
+
+## Dependencies and commodity functionality
+1. For common/commodity functionality, evaluate existing libraries before building from scratch.
+2. If dependency choice is non-trivial, present options with:
+- maintenance health
+- license fit
+- security posture
+- compatibility
+- integration cost
+3. If no suitable dependency exists, state why and proceed with custom implementation.
+
+## Definition of done
+1. Requested change is implemented within agreed scope.
+2. Impact is reported (what changed, where, why).
+3. Relevant validation is run, or explicit validation gaps are reported.
+4. Documentation/config/examples affected by the change are updated.
+5. Follow-ups are listed if anything is intentionally deferred.
+
+## External verification (if available)
+1. When behavior is uncertain or version-sensitive, verify against primary sources.
+2. If external verification is unavailable, mark unknowns as `UNCONFIRMED`.
+
 ## End-of-task capture (substantial tasks)
 1. Answer both:
 - What went wrong, why, and what prevention rule should be added?
