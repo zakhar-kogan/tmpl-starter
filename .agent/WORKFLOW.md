@@ -13,6 +13,8 @@ Use this for substantial tasks. Keep phases ordered.
 1. Restate request, scope, and constraints.
 2. Mark unknowns as `UNCONFIRMED` instead of guessing.
 3. Check `/.agent/helpers/INDEX.md` for relevant helper patterns.
+4. Present findings/questions as a numbered list.
+5. For substantial tasks, wait for agreement before implementation.
 
 Exit criteria:
 1. Task objective is explicit.
@@ -22,6 +24,7 @@ Exit criteria:
 1. Create a short execution plan in `/.agent/execplans/active/` for major work.
 2. Structure major plans according to `/.agent/PLANS.md`.
 3. Define validation steps and rollback-safe sequencing.
+4. If functionality is commodity, perform dependency evaluation before custom implementation.
 
 Exit criteria:
 1. Plan steps are concrete and testable.
@@ -39,6 +42,8 @@ Exit criteria:
 ## Phase 4: Validate
 1. Run relevant checks (build/test/lint/typecheck) if commands are known.
 2. If a command is `UNCONFIRMED` or unavailable, report the gap explicitly.
+3. After source edits, update impacted docs/config/examples.
+4. If failures are pre-existing, report them explicitly.
 
 Exit criteria:
 1. Validation evidence is captured.

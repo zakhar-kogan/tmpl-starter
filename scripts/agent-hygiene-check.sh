@@ -171,6 +171,21 @@ if [[ -f "AGENTS.md" ]]; then
     echo "ERROR: AGENTS.md should reference .agent/helpers/INDEX.md."
     errors=$((errors + 1))
   fi
+
+  if ! rg -q "^## Discussion protocol" "AGENTS.md"; then
+    echo "ERROR: AGENTS.md missing 'Discussion protocol' section."
+    errors=$((errors + 1))
+  fi
+
+  if ! rg -q "^## Dependencies and commodity functionality" "AGENTS.md"; then
+    echo "ERROR: AGENTS.md missing dependency evaluation section."
+    errors=$((errors + 1))
+  fi
+
+  if ! rg -q "^## Definition of done" "AGENTS.md"; then
+    echo "ERROR: AGENTS.md missing 'Definition of done' section."
+    errors=$((errors + 1))
+  fi
 fi
 
 if [[ -f ".agent/helpers/INDEX.md" ]]; then
