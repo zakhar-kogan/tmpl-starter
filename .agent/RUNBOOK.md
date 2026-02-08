@@ -1,26 +1,26 @@
 # Runbook
 
 ## Setup and local run
-1. Install dependencies: `UNCONFIRMED`
-2. Start local services: `UNCONFIRMED`
-3. Run app locally: `UNCONFIRMED`
+1. Install dependencies: none beyond `bash`, `git`, and `rg` for baseline checks.
+2. Start local services: `N/A` (no services in this template repository).
+3. Run app locally: `N/A` (template docs/scripts only).
 
 ## Build/test/quality
-1. Build: `UNCONFIRMED`
-2. Test: `UNCONFIRMED`
-3. Lint: `UNCONFIRMED`
-4. Typecheck: `UNCONFIRMED`
-5. Required pre-finalization checks (fill with concrete commands): `UNCONFIRMED`
+1. Build: `N/A` (no build artifact).
+2. Test: `bash scripts/agent-hygiene-check.sh`.
+3. Lint: `bash scripts/agent-hygiene-check.sh` (includes structural contract checks).
+4. Typecheck: `N/A` (no typed application source).
+5. Required pre-finalization checks (fill with concrete commands): `bash scripts/agent-hygiene-check.sh` and `bash scripts/agent-weekly-review.sh` (for maintenance sweeps).
 
 ## Database operations
-1. Migration command: `UNCONFIRMED`
-2. Seed command: `UNCONFIRMED`
-3. Rollback/recovery: `UNCONFIRMED`
+1. Migration command: `N/A` (no database in this template).
+2. Seed command: `N/A` (no database in this template).
+3. Rollback/recovery: `git revert <commit>` for committed changes or `git restore <path>` for uncommitted file rollback.
 
 ## Incident basics
-1. Health check endpoint/command: `UNCONFIRMED`
-2. Log query path: `UNCONFIRMED`
-3. Rollback command/path: `UNCONFIRMED`
+1. Health check endpoint/command: `bash scripts/agent-hygiene-check.sh`.
+2. Log query path: GitHub Actions run logs for `.github/workflows/agent-hygiene.yml`.
+3. Rollback command/path: `git revert <commit>` and update `.agent/CONTINUITY.md` receipts with rollback context.
 
 ## Agentic framework maintenance
 1. For substantial tasks, create a dated note in `/.agent/notes/` using `/.agent/notes/TEMPLATE.md`.

@@ -20,4 +20,4 @@ For archived plans add:
 - (none yet)
 
 ## Archived ExecPlans
-- (none yet)
+- `EP-2026-02-08__template-local-baseline` — `Status:ARCHIVED` — `Created:2026-02-08` — `Updated:2026-02-08` — `Archived:2026-02-08` — `Path:/.agent/execplans/archive/EP-2026-02-08__template-local-baseline.md` — `Owner:codex` — `Summary:localized template defaults and completed hygiene validation` — `Outcome:core placeholders replaced with concrete local values and helper memory updated`
