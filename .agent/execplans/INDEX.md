@@ -2,6 +2,10 @@
 
 Tracks execution plans for this repository.
 
+Mode note:
+1. `template` mode keeps this index scaffold-only (`(none yet)` entries).
+2. `project` mode tracks live active/archived plans.
+
 ## Conventions
 1. Active plans: `/.agent/execplans/active/`
 2. Archived plans: `/.agent/execplans/archive/`

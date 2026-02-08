@@ -8,17 +8,14 @@ Summarize constraints and acceptance criteria before coding.
 
 ## End-of-task self-improvement
 ```text
-Before finishing, extract 3-7 reusable learnings from this task.
-For each learning: where it applies, why it matters, and where to store it in `.agent/*`.
-Then update those files with concise entries and prune stale or duplicate guidance.
-```
-
-## Failure review (what went wrong?)
-```text
-What went wrong in this task?
-For each issue: root cause, early signal, and one prevention rule.
-Then update .agent/RUNBOOK.md or .agent/PATTERNS.md with the prevention rule.
-Also update a matching helper in `.agent/helpers/` (or add one from `.agent/helpers/TEMPLATE.md`) and register it in `.agent/helpers/INDEX.md`.
+Before finishing, run a balanced review.
+For each item, capture:
+1) what went wrong + root cause + prevention rule,
+2) what went right + measurable improvement (time/readability/performance/manageability/modularity),
+3) decision: promote now | pilot backlog | keep local.
+Then apply updates according to mode:
+- project mode: update notes/helpers/continuity and promote high-leverage items.
+- template mode: keep scaffold sanitized and only improve reusable template policy/docs/scripts.
 ```
 
 ## Helper update after failure
@@ -32,7 +29,7 @@ Then update `.agent/helpers/INDEX.md` with status and summary.
 
 ## Repetition mining
 ```text
-Scan .agent/notes/*.md for repeated commands, bugs, or decisions.
+Scan .agent/notes/*.md for repeated commands, bugs, decisions, and pilot backlog items.
 Propose top reusable items for promotion into durable docs, then apply minimal edits.
 ```
 

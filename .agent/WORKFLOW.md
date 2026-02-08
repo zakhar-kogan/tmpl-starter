@@ -2,6 +2,13 @@
 
 Use this for substantial tasks. Keep phases ordered.
 
+## Modes
+1. `template` mode: keep this repository sanitized as a template baseline.
+2. `project` mode: use full live task-state capture in downstream repos.
+3. Scripts accept mode flags:
+- `bash scripts/agent-hygiene-check.sh --mode template|project`
+- `bash scripts/agent-weekly-review.sh --mode template|project`
+
 ## Phase 1: Clarify
 1. Restate request, scope, and constraints.
 2. Mark unknowns as `UNCONFIRMED` instead of guessing.
@@ -38,12 +45,23 @@ Exit criteria:
 2. Remaining risk is stated.
 
 ## Phase 5: Capture
-1. Add a short note in `/.agent/notes/` (substantial tasks).
-2. Promote durable rules into `RUNBOOK`, `PATTERNS`, or `DECISIONS`.
-3. Update `CONTINUITY` with Goal/Now/Next plus receipts.
-4. Update existing helper docs in `/.agent/helpers/` or create a new one from `/.agent/helpers/TEMPLATE.md`.
+1. Run a balanced review:
+- What went wrong, why, and prevention?
+- What went right, what measurably improved, and is it reusable?
+2. Triage each item:
+- `promote now` (high-leverage and reusable)
+- `pilot backlog` (promising but unproven)
+- `keep local` (one-off context)
+3. In `project` mode:
+- Add/update notes in `/.agent/notes/` (including pilot backlog items).
+- Promote `promote now` items into `RUNBOOK`, `PATTERNS`, or `DECISIONS`.
+- Update helpers in `/.agent/helpers/` for repeatable failure/workflow playbooks.
+- In `project` mode, update `CONTINUITY` with Goal/Now/Next plus receipts.
+4. In `template` mode:
+- Do not add live task-state entries to `CONTINUITY`, `DECISIONS`, `notes/`, `helpers/`, or `execplans/`.
+- Apply only scaffold/policy/template improvements.
 
 Exit criteria:
 1. Reusable learning is persisted.
-2. Continuity state is current.
-3. Helper memory is updated for repeated or costly failures.
+2. Chosen mode constraints are respected.
+3. Promotion decisions are explicit (`promote now | pilot backlog | keep local`).

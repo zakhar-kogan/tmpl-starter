@@ -18,9 +18,15 @@ Use filename format: `YYYY-MM-DD_short-topic.md`
 - Early signal missed:
 - Prevention rule:
 
+## What Went Right
+1. Improvement:
+- Evidence (time/readability/performance/manageability/modularity):
+- Why it worked:
+
 ## Reusable Learnings
 1. Learning:
-- Promote to: `RUNBOOK.md | PATTERNS.md | DECISIONS.md | keep in note`
+- Promotion decision: `promote now | pilot backlog | keep local`
+- Promote to (if `promote now`): `RUNBOOK.md | PATTERNS.md | DECISIONS.md | helpers/`
 - Why:
 
 ## Receipts

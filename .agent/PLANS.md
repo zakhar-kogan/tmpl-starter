@@ -2,6 +2,10 @@
 
 Use ExecPlans for major features, multi-step refactors, migrations, or work that spans multiple sessions.
 
+Mode note:
+1. In `template` mode, keep plan folders/index scaffolded and empty.
+2. In `project` mode, create and maintain live plans.
+
 ## Storage and Lifecycle
 1. Active plans live in `/.agent/execplans/active/`.
 2. Archived plans live in `/.agent/execplans/archive/`.

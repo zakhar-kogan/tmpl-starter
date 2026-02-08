@@ -2,7 +2,8 @@
 
 Facts only. No transcripts. If unknown, write `UNCONFIRMED`.
 Each entry must include date and provenance tag: `[USER]`, `[CODE]`, `[TOOL]`, `[ASSUMPTION]`.
-Update this file whenever Goal/Now/Next/Decisions materially change.
+In `project` mode, update this file whenever Goal/Now/Next/Decisions materially change.
+In `template` mode, keep this file as scaffold-only.
 
 ## Size caps
 - Snapshot: <= 25 non-empty lines.

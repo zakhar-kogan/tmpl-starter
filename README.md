@@ -1,115 +1,48 @@
 # tmpl-starter
 
-Starter repo for building an agent-friendly engineering workflow with durable project memory, phase-gated execution, and hygiene checks.
+Template for an extremely simple but effective agent workflow with:
+- a stable `/.agent` contract
+- phase-gated execution for substantial tasks
+- mode-aware hygiene checks (`template` vs `project`)
 
-## Quick Overview
+## Repository Mode
 
-This repo is structured around a stable `/.agent` contract:
+This repository is maintained in `template` mode.
 
-- predictable startup context for every session
-- explicit task workflow phases for substantial work
-- a required self-improvement loop to retain learnings
-- lightweight scripts + CI checks to keep the contract healthy
+- `template` mode: scaffold stays sanitized (no live task-state writes in continuity/decisions/notes/helpers/execplans)
+- `project` mode: downstream cloned repos enable full self-improving capture loop
 
-If you want a reusable baseline for new projects, this repo is the scaffold.
+## Quick Start
 
-## Structure At A Glance
-
-```text
-.
-├── AGENTS.md
-├── .agent/
-│   ├── INDEX.md
-│   ├── CONTINUITY.md
-│   ├── CONTEXT.md
-│   ├── WORKFLOW.md
-│   ├── PLANS.md
-│   ├── RUNBOOK.md
-│   ├── PATTERNS.md
-│   ├── DECISIONS.md
-│   ├── PROMPTS.md
-│   ├── helpers/
-│   ├── notes/
-│   └── execplans/
-├── docs/
-├── scripts/
-└── .github/workflows/
-```
-
-## Core Functions
-
-1. Session bootstrap
-Read order is fixed: `INDEX -> CONTINUITY -> CONTEXT -> WORKFLOW -> helpers/INDEX`.
-
-2. Phase-gated execution for substantial tasks
-Follow `clarify -> plan -> implement -> validate -> capture`.
-
-3. Self-improvement loop
-At the end of substantial tasks:
-- run a short failure review (`what / why / prevention`)
-- add a note in `/.agent/notes/`
-- promote durable learnings into `RUNBOOK`, `PATTERNS`, `DECISIONS`, and/or `helpers`
-- update `CONTINUITY.md`
-
-4. Plan lifecycle management
-Major work uses plans in `/.agent/execplans/active/`, then archive completed plans.
-
-5. Contract hygiene
-Run `bash scripts/agent-hygiene-check.sh` locally and in CI (`.github/workflows/agent-hygiene.yml`).
-
-## Getting Started
-
-1. Clone/copy this repo as your base template.
-2. Fill all `UNCONFIRMED` fields in:
+1. Clone/copy this repo as your base.
+2. Fill `UNCONFIRMED` fields in:
 - `AGENTS.md`
 - `/.agent/CONTEXT.md`
 - `/.agent/RUNBOOK.md`
-3. Run hygiene checks:
+3. Run checks in template mode:
 
 ```bash
-bash scripts/agent-hygiene-check.sh
+bash scripts/agent-hygiene-check.sh --mode template
+bash scripts/agent-weekly-review.sh --mode template
 ```
 
-4. (Optional) Run weekly maintenance helper:
+4. In downstream project repos, use project mode:
 
 ```bash
-bash scripts/agent-weekly-review.sh
+bash scripts/agent-hygiene-check.sh --mode project
+bash scripts/agent-weekly-review.sh --mode project
 ```
 
-5. Start doing real tasks; keep the loop disciplined (especially `capture`).
+## Contract Summary
 
-## Extending This Template
-
-Treat extensions as modular layers. Keep core `/.agent` conventions stable, and add opinionated features around them.
-
-### Recommended Extension Areas
-
-1. GitHub Actions / CI/CD
-- add build/test/lint/typecheck workflows
-- keep agent-hygiene workflow as a required guardrail
-
-2. Tooling integrations
-- issue tracker hooks
-- release automation
-- observability/reporting sync
-
-3. Dev environment
-- add `.devcontainer/` setup
-- preinstall required CLIs and repo bootstrap commands
-
-4. Repo-specific policy packs
-- add local `AGENTS.md` in subdirectories when teams need extra constraints
-
-### Extension Pattern (repeat for each module)
-
-1. Add docs under `docs/` describing purpose, scope, and rollout steps.
-2. Add scripts/workflows/config required by that module.
-3. Update relevant `UNCONFIRMED` commands/constraints.
-4. Validate with `scripts/agent-hygiene-check.sh`.
-5. Record durable choices in `/.agent/DECISIONS.md`.
+1. Startup order: `INDEX -> CONTINUITY -> CONTEXT -> WORKFLOW -> helpers/INDEX`
+2. Substantial task flow: `clarify -> plan -> implement -> validate -> capture`
+3. End-of-task capture uses a balanced review:
+- what went wrong + prevention
+- what went right + measurable improvement
+- decision per item: `promote now | pilot backlog | keep local`
 
 ## Reference Docs
 
-- Framework: `docs/AGENTIC_STARTER_FRAMEWORK.md`
-- Self-improvement loop: `docs/SELF_IMPROVEMENT_LOOP.md`
+- Canonical framework guide: `docs/FRAMEWORK_GUIDE.md`
 - Subdirectory policy example: `docs/examples/SUBDIR_AGENTS_EXAMPLE.md`

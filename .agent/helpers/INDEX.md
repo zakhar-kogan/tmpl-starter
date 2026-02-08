@@ -12,7 +12,7 @@ Machine-facing helper memory for recurring failures and repeatable workflows.
 - `H-YYYY-MM-DD__slug` — `Status:<ACTIVE|STABLE|RETIRED>` — `Path:<repo-relative path>` — `Scope:<where it applies>` — `Summary:<one line>`
 
 ## Active Helpers
-- `H-2026-02-07__postmortem-to-helper-update` — `Status:ACTIVE` — `Path:/.agent/helpers/H-2026-02-07__postmortem-to-helper-update.md` — `Scope:substantial tasks` — `Summary:convert failure reviews into updated helper playbooks`
+- (none in template mode)
 
 ## Stable Helpers
 - (none yet)

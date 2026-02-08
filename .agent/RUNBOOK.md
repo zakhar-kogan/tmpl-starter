@@ -23,12 +23,15 @@
 3. Rollback command/path: `UNCONFIRMED`
 
 ## Agentic framework maintenance
-1. For substantial tasks, create a dated note in `/.agent/notes/` using `/.agent/notes/TEMPLATE.md`.
-2. Before finalizing, run a failure review (`what went wrong`, `why`, `prevention rule`).
-3. Promote durable rules into `RUNBOOK.md`, `PATTERNS.md`, or `DECISIONS.md`; avoid duplicating note-level detail.
-4. Update `/.agent/CONTINUITY.md` with Goal/Now/Next and dated provenance-tagged receipts.
-5. Weekly hygiene: prune stale notes, deduplicate conflicting guidance, and update `UNCONFIRMED` commands when known.
-6. Run contract checks: `bash scripts/agent-hygiene-check.sh`.
-7. Run weekly maintenance review: `bash scripts/agent-weekly-review.sh`.
-8. Keep reusable troubleshooting/workflow helpers in `/.agent/helpers/` and index them in `/.agent/helpers/INDEX.md`.
-9. Promote stabilized helper patterns into durable docs after repeated successful use.
+1. Set workflow mode explicitly:
+- Template repo: `--mode template` (sanitized scaffold only).
+- Downstream project repo: `--mode project` (full task-state capture).
+2. For substantial tasks, run a balanced review:
+- What went wrong, why, prevention?
+- What went right, measurable improvement, reusable or not?
+3. Triage each item as `promote now | pilot backlog | keep local`.
+4. In `project` mode, update notes/helpers/continuity and promote high-leverage items.
+5. In `template` mode, do not record live task state; only improve reusable template policy/docs/scripts.
+6. Weekly hygiene: prune stale notes, deduplicate conflicting guidance, and update `UNCONFIRMED` commands when known.
+7. Run contract checks: `bash scripts/agent-hygiene-check.sh --mode template|project`.
+8. Run weekly maintenance review: `bash scripts/agent-weekly-review.sh --mode template|project`.

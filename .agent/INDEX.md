@@ -32,7 +32,6 @@ Start here each session.
 ## Workflow
 1. Read `CONTINUITY.md`, then `CONTEXT.md`, then `WORKFLOW.md`, then `helpers/INDEX.md`.
 2. Execute task.
-3. Capture learnings in `notes/`.
-4. Update helper memory in `helpers/` for repeatable failure-handling patterns.
-5. Promote durable items to `RUNBOOK.md`, `PATTERNS.md`, `DECISIONS.md`.
-6. Update `CONTINUITY.md` snapshot and receipts.
+3. Select workflow mode (`template` for this repo, `project` for downstream repos).
+4. Run balanced capture (`went wrong + prevention`, `went right + measurable improvement`).
+5. Apply updates according to mode in `WORKFLOW.md`.
