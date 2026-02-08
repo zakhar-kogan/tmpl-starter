@@ -13,7 +13,6 @@ Machine-facing helper memory for recurring failures and repeatable workflows.
 
 ## Active Helpers
 - `H-2026-02-07__postmortem-to-helper-update` — `Status:ACTIVE` — `Path:/.agent/helpers/H-2026-02-07__postmortem-to-helper-update.md` — `Scope:substantial tasks` — `Summary:convert failure reviews into updated helper playbooks`
-- `H-2026-02-08__sandbox-write-failure-recovery` — `Status:ACTIVE` — `Path:/.agent/helpers/H-2026-02-08__sandbox-write-failure-recovery.md` — `Scope:sandboxed local runs` — `Summary:recover from non-essential write failures by switching to read-only checks or explicit escalation`
 
 ## Stable Helpers
 - (none yet)

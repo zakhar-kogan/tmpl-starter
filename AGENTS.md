@@ -51,10 +51,10 @@
 2. Record key source-driven decisions in `/.agent/CONTINUITY.md` receipts.
 
 ## Project-specific configuration (fill this per repo)
-1. Build command: `N/A (template repository has no build artifact)`
-2. Test command: `bash scripts/agent-hygiene-check.sh`
-3. Lint command: `bash scripts/agent-hygiene-check.sh`
-4. Typecheck command: `N/A (no typed application source in template)`
-5. Dev run command: `N/A (no runtime service in template)`
+1. Build command: `UNCONFIRMED`
+2. Test command: `UNCONFIRMED`
+3. Lint command: `UNCONFIRMED`
+4. Typecheck command: `UNCONFIRMED`
+5. Dev run command: `UNCONFIRMED`
 6. Agent hygiene check: `bash scripts/agent-hygiene-check.sh`
 7. Weekly maintenance review: `bash scripts/agent-weekly-review.sh`
