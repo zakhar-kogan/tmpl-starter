@@ -8,9 +8,10 @@
 5. Read `/.agent/helpers/INDEX.md` for reusable failure-handling helpers.
 
 ## Modes
-1. `template` mode (default in this repository): keep the repo sanitized as a reusable scaffold. Do not record live task state in `CONTINUITY`, `DECISIONS`, `notes/`, `helpers/`, or `execplans/`.
-2. `project` mode (for downstream cloned repos): run the full self-improving loop with live task-state capture.
-3. Use mode-aware scripts:
+1. `project` mode (default): run the full self-improving loop with live task-state capture.
+2. `template` mode: keep the repo sanitized as a reusable scaffold. Do not record live task state in `CONTINUITY`, `DECISIONS`, `notes/`, `helpers/`, or `execplans/`.
+3. To enforce strict scaffold hygiene while editing the template itself, set `agent.mode = "template"` in `/.agent/settings.toml`.
+4. Use mode-aware scripts:
 - Hygiene: `bash scripts/agent-hygiene-check.sh --mode template|project`
 - Weekly review: `bash scripts/agent-weekly-review.sh --mode template|project`
 
@@ -78,5 +79,5 @@
 3. Lint command: `UNCONFIRMED`
 4. Typecheck command: `UNCONFIRMED`
 5. Dev run command: `UNCONFIRMED`
-6. Agent hygiene check: `bash scripts/agent-hygiene-check.sh --mode template`
+6. Agent hygiene check: `bash scripts/agent-hygiene-check.sh`
 7. Weekly maintenance review: `bash scripts/agent-weekly-review.sh --mode template`

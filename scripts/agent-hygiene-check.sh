@@ -4,13 +4,46 @@ set -euo pipefail
 repo_root="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 cd "$repo_root"
 
-mode="template"
+default_mode="project"
+settings_path=".agent/settings.toml"
+mode=""
+mode_source="default"
 
 usage() {
   cat <<'USAGE'
 Usage: bash scripts/agent-hygiene-check.sh [--mode template|project]
-Defaults to --mode template.
+Defaults to agent.mode in .agent/settings.toml, then project.
 USAGE
+}
+
+read_settings_mode() {
+  local path="$1"
+  [[ -f "$path" ]] || return 0
+
+  awk '
+    BEGIN { in_agent=0 }
+    /^[[:space:]]*\[/ {
+      in_agent = ($0 ~ /^[[:space:]]*\[agent\][[:space:]]*$/)
+      next
+    }
+    in_agent && $0 ~ /^[[:space:]]*mode[[:space:]]*=/ {
+      value = $0
+      sub(/^[[:space:]]*mode[[:space:]]*=[[:space:]]*/, "", value)
+      sub(/[[:space:]]*(#|;).*$/, "", value)
+      gsub(/^[[:space:]]+|[[:space:]]+$/, "", value)
+      if (value ~ /^".*"$/) {
+        sub(/^"/, "", value)
+        sub(/"$/, "", value)
+      }
+      print value
+      exit
+    }
+  ' "$path"
+}
+
+is_valid_mode() {
+  local candidate="$1"
+  [[ "$candidate" == "template" || "$candidate" == "project" ]]
 }
 
 while [[ $# -gt 0 ]]; do
@@ -21,6 +54,7 @@ while [[ $# -gt 0 ]]; do
         exit 2
       fi
       mode="$2"
+      mode_source="cli"
       shift 2
       ;;
     -h|--help)
@@ -35,8 +69,24 @@ while [[ $# -gt 0 ]]; do
   esac
 done
 
-if [[ "$mode" != "template" && "$mode" != "project" ]]; then
-  echo "ERROR: invalid mode '$mode'. Use template or project."
+if [[ -z "$mode" ]]; then
+  settings_mode="$(read_settings_mode "$settings_path")"
+  if [[ -n "$settings_mode" ]]; then
+    if is_valid_mode "$settings_mode"; then
+      mode="$settings_mode"
+      mode_source="settings"
+    else
+      echo "WARN: invalid agent.mode '$settings_mode' in $settings_path; defaulting to $default_mode." >&2
+      mode="$default_mode"
+      mode_source="default"
+    fi
+  else
+    mode="$default_mode"
+  fi
+fi
+
+if ! is_valid_mode "$mode"; then
+  echo "ERROR: invalid mode '$mode'. Use project or template."
   exit 2
 fi
 

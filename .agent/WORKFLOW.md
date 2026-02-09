@@ -3,9 +3,10 @@
 Use this for substantial tasks. Keep phases ordered.
 
 ## Modes
-1. `template` mode: keep this repository sanitized as a template baseline.
-2. `project` mode: use full live task-state capture in downstream repos.
-3. Scripts accept mode flags:
+1. `project` mode (default): use full live task-state capture in downstream repos.
+2. `template` mode: keep this repository sanitized as a template baseline.
+3. To enforce strict scaffold hygiene while editing the template itself, set `agent.mode = "template"` in `/.agent/settings.toml`.
+4. Scripts accept mode flags:
 - `bash scripts/agent-hygiene-check.sh --mode template|project`
 - `bash scripts/agent-weekly-review.sh --mode template|project`
 
