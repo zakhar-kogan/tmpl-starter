@@ -64,13 +64,16 @@ Otherwise:
 ## Script Usage
 ```bash
 # template repository maintenance
-bash scripts/agent-hygiene-check.sh --mode template
-bash scripts/agent-weekly-review.sh --mode template
+make hygiene MODE=template
+make review MODE=template
 
 # downstream project repository
-bash scripts/agent-hygiene-check.sh --mode project
-bash scripts/agent-weekly-review.sh --mode project
+make init-project
+make hygiene MODE=project
+make review MODE=project
 ```
+
+Hygiene thresholds (for example continuity size caps and AGENTS.md size cap) are configurable in `/.agent/settings.toml` under `[hygiene]`.
 
 ## Weekly Review Intent
 1. Enforce mode-specific hygiene.

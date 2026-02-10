@@ -1,0 +1,29 @@
+# OS
+.DS_Store
+
+# Editors
+.idea/
+.vscode/
+.claude/settings.local.json
+*.swp
+*.swo
+
+# Logs and temp
+*.log
+tmp/
+
+# Environment files
+.env
+.env.*
+
+# JavaScript / TypeScript
+node_modules/
+dist/
+coverage/
+
+# Python
+__pycache__/
+*.pyc
+.pytest_cache/
+.mypy_cache/
+.venv/

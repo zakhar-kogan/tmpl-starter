@@ -1,2 +1,9 @@
 [agent]
-mode = "project"
+mode = "template"
+
+[hygiene]
+continuity_snapshot_max_lines = 25
+continuity_done_max_bullets = 7
+continuity_working_set_max_bullets = 12
+continuity_receipts_max_bullets = 20
+agents_md_max_bytes = 12288

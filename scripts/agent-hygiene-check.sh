@@ -16,19 +16,21 @@ Defaults to agent.mode in .agent/settings.toml, then project.
 USAGE
 }
 
-read_settings_mode() {
+read_settings_value() {
   local path="$1"
+  local section="$2"
+  local key="$3"
   [[ -f "$path" ]] || return 0
 
-  awk '
+  awk -v section="$section" -v key="$key" '
     BEGIN { in_agent=0 }
     /^[[:space:]]*\[/ {
-      in_agent = ($0 ~ /^[[:space:]]*\[agent\][[:space:]]*$/)
+      in_agent = ($0 ~ "^[[:space:]]*\\[" section "\\][[:space:]]*$")
       next
     }
-    in_agent && $0 ~ /^[[:space:]]*mode[[:space:]]*=/ {
+    in_agent && $0 ~ "^[[:space:]]*" key "[[:space:]]*=" {
       value = $0
-      sub(/^[[:space:]]*mode[[:space:]]*=[[:space:]]*/, "", value)
+      sub("^[[:space:]]*" key "[[:space:]]*=[[:space:]]*", "", value)
       sub(/[[:space:]]*(#|;).*$/, "", value)
       gsub(/^[[:space:]]+|[[:space:]]+$/, "", value)
       if (value ~ /^".*"$/) {
@@ -41,9 +43,39 @@ read_settings_mode() {
   ' "$path"
 }
 
+read_settings_mode() {
+  local path="$1"
+  read_settings_value "$path" "agent" "mode"
+}
+
 is_valid_mode() {
   local candidate="$1"
   [[ "$candidate" == "template" || "$candidate" == "project" ]]
+}
+
+is_non_negative_int() {
+  local candidate="$1"
+  [[ "$candidate" =~ ^[0-9]+$ ]]
+}
+
+read_numeric_setting() {
+  local key="$1"
+  local fallback="$2"
+  local value
+
+  value="$(read_settings_value "$settings_path" "hygiene" "$key")"
+  if [[ -z "$value" ]]; then
+    echo "$fallback"
+    return 0
+  fi
+
+  if is_non_negative_int "$value"; then
+    echo "$value"
+    return 0
+  fi
+
+  echo "WARN: invalid hygiene.$key '$value' in $settings_path; defaulting to $fallback." >&2
+  echo "$fallback"
 }
 
 while [[ $# -gt 0 ]]; do
@@ -91,7 +123,12 @@ if ! is_valid_mode "$mode"; then
 fi
 
 errors=0
-max_agents_md_bytes=12288
+
+continuity_snapshot_max_lines="$(read_numeric_setting "continuity_snapshot_max_lines" 25)"
+continuity_done_max_bullets="$(read_numeric_setting "continuity_done_max_bullets" 7)"
+continuity_working_set_max_bullets="$(read_numeric_setting "continuity_working_set_max_bullets" 12)"
+continuity_receipts_max_bullets="$(read_numeric_setting "continuity_receipts_max_bullets" 20)"
+max_agents_md_bytes="$(read_numeric_setting "agents_md_max_bytes" 12288)"
 
 required_files=(
   "AGENTS.md"
@@ -181,20 +218,20 @@ if [[ -f ".agent/CONTINUITY.md" ]]; then
   working_bullets="$(section_bullet_count "$continuity" "## Working set" "## Decisions")"
   receipt_bullets="$(section_bullet_count "$continuity" "## Receipts" "EOF-NONEXISTENT-SENTINEL")"
 
-  if (( snapshot_lines > 25 )); then
-    echo "ERROR: .agent/CONTINUITY.md Snapshot has $snapshot_lines non-empty lines (max 25)."
+  if (( snapshot_lines > continuity_snapshot_max_lines )); then
+    echo "ERROR: .agent/CONTINUITY.md Snapshot has $snapshot_lines non-empty lines (max $continuity_snapshot_max_lines)."
     errors=$((errors + 1))
   fi
-  if (( done_bullets > 7 )); then
-    echo "ERROR: .agent/CONTINUITY.md Done (recent) has $done_bullets bullets (max 7)."
+  if (( done_bullets > continuity_done_max_bullets )); then
+    echo "ERROR: .agent/CONTINUITY.md Done (recent) has $done_bullets bullets (max $continuity_done_max_bullets)."
     errors=$((errors + 1))
   fi
-  if (( working_bullets > 12 )); then
-    echo "ERROR: .agent/CONTINUITY.md Working set has $working_bullets bullets (max 12)."
+  if (( working_bullets > continuity_working_set_max_bullets )); then
+    echo "ERROR: .agent/CONTINUITY.md Working set has $working_bullets bullets (max $continuity_working_set_max_bullets)."
     errors=$((errors + 1))
   fi
-  if (( receipt_bullets > 20 )); then
-    echo "ERROR: .agent/CONTINUITY.md Receipts has $receipt_bullets bullets (max 20)."
+  if (( receipt_bullets > continuity_receipts_max_bullets )); then
+    echo "ERROR: .agent/CONTINUITY.md Receipts has $receipt_bullets bullets (max $continuity_receipts_max_bullets)."
     errors=$((errors + 1))
   fi
 

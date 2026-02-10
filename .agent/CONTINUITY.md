@@ -6,10 +6,12 @@ In `project` mode, update this file whenever Goal/Now/Next/Decisions materially 
 In `template` mode, keep this file as scaffold-only.
 
 ## Size caps
+- Defaults:
 - Snapshot: <= 25 non-empty lines.
 - Done (recent): <= 7 bullets.
 - Working set: <= 12 bullets.
 - Receipts: <= 20 bullets (keep recent, compress older items).
+- Thresholds are configurable in `/.agent/settings.toml` under `[hygiene]`.
 
 ## Snapshot
 

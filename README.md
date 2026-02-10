@@ -1,46 +1,53 @@
 # tmpl-starter
 
-Template for an extremely simple but effective agent workflow with:
+Agent workflow framework template with:
 - a stable `/.agent` contract
 - phase-gated execution for substantial tasks
 - mode-aware hygiene checks (`template` vs `project`)
 
-## Repository Mode
+This is not an application boilerplate (no runtime stack, no app scaffolding).
 
-This repository is maintained in `template` mode.
+## Quickstart Checklist (After Cloning)
+
+1. Initialize your project metadata and switch to project mode:
+
+```bash
+make init-project
+```
+
+2. Review and finish any remaining `UNCONFIRMED` placeholders:
+- `AGENTS.md`
+- `/.agent/CONTEXT.md`
+- `/.agent/RUNBOOK.md`
+
+3. Validate scaffold hygiene while still template-like:
+
+```bash
+make hygiene MODE=template
+make review MODE=template
+```
+
+4. Validate downstream project workflow behavior:
+
+```bash
+make hygiene MODE=project
+make review MODE=project
+```
+
+5. Start using the contract in daily work:
+- startup order: `INDEX -> CONTINUITY -> CONTEXT -> WORKFLOW -> helpers/INDEX`
+- substantial task flow: `clarify -> plan -> implement -> validate -> capture`
+
+## Repository Modes
 
 - `template` mode: scaffold stays sanitized (no live task-state writes in continuity/decisions/notes/helpers/execplans)
 - `project` mode: downstream cloned repos enable full self-improving capture loop
 
-## Quick Start
+Mode defaults live in `/.agent/settings.toml`.
 
-1. Clone/copy this repo as your base.
-2. Fill `UNCONFIRMED` fields in:
-- `AGENTS.md`
-- `/.agent/CONTEXT.md`
-- `/.agent/RUNBOOK.md`
-3. Run checks in template mode:
+## License Scope
 
-```bash
-bash scripts/agent-hygiene-check.sh --mode template
-bash scripts/agent-weekly-review.sh --mode template
-```
-
-4. In downstream project repos, use project mode:
-
-```bash
-bash scripts/agent-hygiene-check.sh --mode project
-bash scripts/agent-weekly-review.sh --mode project
-```
-
-## Contract Summary
-
-1. Startup order: `INDEX -> CONTINUITY -> CONTEXT -> WORKFLOW -> helpers/INDEX`
-2. Substantial task flow: `clarify -> plan -> implement -> validate -> capture`
-3. End-of-task capture uses a balanced review:
-- what went wrong + prevention
-- what went right + measurable improvement
-- decision per item: `promote now | pilot backlog | keep local`
+`LICENSE` covers this workflow template framework. Downstream projects can keep MIT or choose a different license policy for their own code.
 
 ## Reference Docs
 

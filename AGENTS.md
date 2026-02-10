@@ -90,5 +90,5 @@
 3. Lint command: `UNCONFIRMED`
 4. Typecheck command: `UNCONFIRMED`
 5. Dev run command: `UNCONFIRMED`
-6. Agent hygiene check: `bash scripts/agent-hygiene-check.sh`
-7. Weekly maintenance review: `bash scripts/agent-weekly-review.sh --mode template`
+6. Agent hygiene check: `make hygiene MODE=template|project`
+7. Weekly maintenance review: `make review MODE=template|project`

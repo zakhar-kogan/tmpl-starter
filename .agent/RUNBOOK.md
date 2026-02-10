@@ -33,5 +33,5 @@
 4. In `project` mode, update notes/helpers/continuity and promote high-leverage items.
 5. In `template` mode, do not record live task state; only improve reusable template policy/docs/scripts.
 6. Weekly hygiene: prune stale notes, deduplicate conflicting guidance, and update `UNCONFIRMED` commands when known.
-7. Run contract checks: `bash scripts/agent-hygiene-check.sh --mode template|project`.
-8. Run weekly maintenance review: `bash scripts/agent-weekly-review.sh --mode template|project`.
+7. Run contract checks: `make hygiene MODE=template|project`.
+8. Run weekly maintenance review: `make review MODE=template|project`.
