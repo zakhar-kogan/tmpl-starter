@@ -26,6 +26,17 @@
 8. For common/commodity functionality, evaluate existing libraries before building from scratch.
 9. Do not install host-level packages unless explicitly requested by the user.
 
+## Instruction layering (`AGENTS.md` first, skills second)
+1. Treat `AGENTS.md` as the default control plane for repo policy and execution behavior.
+2. Use skills only as optional accelerators for specialized, reusable workflows (for example: PDF manipulation, external-service install routines, domain-specific automation).
+3. If instructions conflict, prefer repo-local `AGENTS.md` and local subdirectory `AGENTS.md` over generic skill guidance.
+4. Keep root `AGENTS.md` concise and durable; move long procedural detail into linked docs/scripts.
+
+## Context budget
+1. Keep root `AGENTS.md` within `12288` bytes so instruction discovery remains efficient.
+2. When adding new guidance, prefer short policy statements plus references to `/.agent/*` docs instead of embedding long playbooks.
+3. If policy text grows beyond budget, split by concern into local `AGENTS.md` files and adapter docs.
+
 ## Discussion protocol (numbered findings -> agreement -> execution)
 1. When presenting findings (risks, assumptions, tradeoffs, questions, proposed changes), use a numbered list.
 2. Keep numbering stable across follow-ups so decisions map 1:1 to items.

@@ -91,6 +91,7 @@ if ! is_valid_mode "$mode"; then
 fi
 
 errors=0
+max_agents_md_bytes=12288
 
 required_files=(
   "AGENTS.md"
@@ -217,6 +218,12 @@ if [[ -f ".agent/execplans/INDEX.md" ]]; then
 fi
 
 if [[ -f "AGENTS.md" ]]; then
+  agents_bytes="$(wc -c < "AGENTS.md" | tr -d ' ')"
+  if (( agents_bytes > max_agents_md_bytes )); then
+    echo "ERROR: AGENTS.md is $agents_bytes bytes (max $max_agents_md_bytes). Move long guidance into linked docs."
+    errors=$((errors + 1))
+  fi
+
   if ! rg -q "\\.agent/helpers/INDEX\\.md" "AGENTS.md"; then
     echo "ERROR: AGENTS.md should reference .agent/helpers/INDEX.md."
     errors=$((errors + 1))

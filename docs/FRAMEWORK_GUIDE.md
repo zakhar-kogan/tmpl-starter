@@ -47,12 +47,19 @@ Otherwise:
 2. `/.agent/WORKFLOW.md`: full execution + capture behavior.
 3. `README.md`: onboarding and mode usage.
 
+## Instruction Strategy
+1. Prefer `AGENTS.md` as the primary instruction layer for repo behavior.
+2. Use skills as optional accelerators for specialized/repetitive workflows, not as the default policy container.
+3. Keep root `AGENTS.md` concise and durable; place long operational detail in `/.agent/*` docs or scripts.
+4. Enforce a root `AGENTS.md` size budget (`12288` bytes max) through hygiene checks.
+
 ## Harness-agnostic policy boundary
 1. Core workflow/policies stay in `AGENTS.md` and `/.agent/*`.
 2. Harness-specific behavior belongs in adapter docs/scripts, not core policy text.
 
 ## References
 1. `codex-starter` (attribution for portable behavior patterns): https://github.com/Skarian/codex-starter
+2. Vercel eval note on instruction strategy: https://vercel.com/blog/agents-md-outperforms-skills-in-our-agent-evals
 
 ## Script Usage
 ```bash

@@ -26,10 +26,12 @@ Exit criteria:
 2. Structure major plans according to `/.agent/PLANS.md`.
 3. Define validation steps and rollback-safe sequencing.
 4. If functionality is commodity, perform dependency evaluation before custom implementation.
+5. If changing instruction strategy (`AGENTS.md` policy vs skills/tooling), define a small A/B task sample and success criteria before rollout.
 
 Exit criteria:
 1. Plan steps are concrete and testable.
 2. Risks and mitigations are documented.
+3. Instruction-strategy changes include an explicit evaluation check.
 
 ## Phase 3: Implement
 1. Apply small, reviewable diffs.
