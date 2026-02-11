@@ -103,6 +103,12 @@ prompt jobs_workers "Jobs/workers" "UNCONFIRMED"
 prompt hosting_deploy "Hosting/deploy" "UNCONFIRMED"
 
 echo
+prompt constraint_1 "Core constraint 1" "UNCONFIRMED"
+prompt constraint_2 "Core constraint 2" "UNCONFIRMED"
+prompt constraint_3 "Core constraint 3" "UNCONFIRMED"
+prompt constraint_4 "Core constraint 4" "UNCONFIRMED"
+
+echo
 prompt build_cmd "Build command" "UNCONFIRMED"
 prompt test_cmd "Test command" "UNCONFIRMED"
 prompt lint_cmd "Lint command" "UNCONFIRMED"
@@ -127,6 +133,10 @@ replace_prefixed_line ".agent/CONTEXT.md" "2. Backend/API: " "$(sanitize_value "
 replace_prefixed_line ".agent/CONTEXT.md" "3. Data store: " "$(sanitize_value "$data_store")"
 replace_prefixed_line ".agent/CONTEXT.md" "4. Jobs/workers: " "$(sanitize_value "$jobs_workers")"
 replace_prefixed_line ".agent/CONTEXT.md" "5. Hosting/deploy: " "$(sanitize_value "$hosting_deploy")"
+replace_prefixed_line ".agent/CONTEXT.md" "1. Constraint 1: " "$(sanitize_value "$constraint_1")"
+replace_prefixed_line ".agent/CONTEXT.md" "2. Constraint 2: " "$(sanitize_value "$constraint_2")"
+replace_prefixed_line ".agent/CONTEXT.md" "3. Constraint 3: " "$(sanitize_value "$constraint_3")"
+replace_prefixed_line ".agent/CONTEXT.md" "4. Constraint 4: " "$(sanitize_value "$constraint_4")"
 replace_prefixed_line ".agent/CONTEXT.md" "1. Main spec: " "$(sanitize_value "$main_spec")"
 replace_prefixed_line ".agent/CONTEXT.md" "2. Data/schema docs: " "$(sanitize_value "$data_docs")"
 replace_prefixed_line ".agent/CONTEXT.md" "3. Implementation roadmap: " "$(sanitize_value "$roadmap")"
@@ -151,4 +161,7 @@ set_project_mode "$settings_path"
 
 echo
 echo "Initialized core placeholders and switched .agent/settings.toml to project mode."
-echo "Next: run 'make hygiene MODE=project' and resolve any remaining UNCONFIRMED fields."
+if ! bash scripts/agent-hygiene-check.sh --mode project; then
+  echo "WARN: hygiene checks are still failing in project mode; resolve remaining issues."
+fi
+echo "Next: resolve any remaining UNCONFIRMED fields."

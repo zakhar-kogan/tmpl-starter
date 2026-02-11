@@ -38,3 +38,15 @@ Propose top reusable items for promotion into durable docs, then apply minimal e
 Audit .agent/*.md for conflicting instructions or stale assumptions.
 Resolve conflicts and keep one clear current policy.
 ```
+
+## Dependency evaluation
+```text
+A task may need external dependencies.
+Evaluate options and present:
+1) maintenance health,
+2) license fit,
+3) security posture,
+4) compatibility,
+5) integration cost.
+If no suitable dependency exists, state why and proceed with custom implementation.
+```

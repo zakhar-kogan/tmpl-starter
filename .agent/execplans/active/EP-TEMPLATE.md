@@ -1,7 +1,7 @@
 # ExecPlan: EP-YYYY-MM-DD__slug
 
 ## Metadata
-- Status: `DRAFT | ACTIVE | BLOCKED | DONE`
+- Status: `DRAFT | ACTIVE | BLOCKED | DONE | ARCHIVED`
 - Created: `YYYY-MM-DD`
 - Updated: `YYYY-MM-DD`
 - Owner: `UNCONFIRMED`

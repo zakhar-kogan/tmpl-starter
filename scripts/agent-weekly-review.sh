@@ -4,12 +4,39 @@ set -euo pipefail
 repo_root="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 cd "$repo_root"
 
-mode="template"
+default_mode="project"
+settings_path=".agent/settings.toml"
+mode=""
+
+read_settings_mode() {
+  local path="$1"
+  [[ -f "$path" ]] || return 0
+
+  awk '
+    BEGIN { in_agent=0 }
+    /^[[:space:]]*\[/ {
+      in_agent = ($0 ~ /^[[:space:]]*\[agent\][[:space:]]*$/)
+      next
+    }
+    in_agent && $0 ~ /^[[:space:]]*mode[[:space:]]*=/ {
+      value = $0
+      sub(/^[[:space:]]*mode[[:space:]]*=[[:space:]]*/, "", value)
+      sub(/[[:space:]]*(#|;).*$/, "", value)
+      gsub(/^[[:space:]]+|[[:space:]]+$/, "", value)
+      if (value ~ /^".*"$/) {
+        sub(/^"/, "", value)
+        sub(/"$/, "", value)
+      }
+      print value
+      exit
+    }
+  ' "$path"
+}
 
 usage() {
   cat <<'USAGE'
 Usage: bash scripts/agent-weekly-review.sh [--mode template|project]
-Defaults to --mode template.
+Defaults to agent.mode in .agent/settings.toml, then project.
 USAGE
 }
 
@@ -34,6 +61,18 @@ while [[ $# -gt 0 ]]; do
       ;;
   esac
 done
+
+if [[ -z "$mode" ]]; then
+  settings_mode="$(read_settings_mode "$settings_path")"
+  if [[ "$settings_mode" == "template" || "$settings_mode" == "project" ]]; then
+    mode="$settings_mode"
+  elif [[ -n "$settings_mode" ]]; then
+    echo "WARN: invalid agent.mode '$settings_mode' in $settings_path; defaulting to $default_mode." >&2
+    mode="$default_mode"
+  else
+    mode="$default_mode"
+  fi
+fi
 
 if [[ "$mode" != "template" && "$mode" != "project" ]]; then
   echo "ERROR: invalid mode '$mode'. Use template or project."
