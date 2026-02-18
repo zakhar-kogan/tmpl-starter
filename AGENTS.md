@@ -25,6 +25,9 @@
 7. If a subdirectory adds local constraints, add a local `AGENTS.md` there and keep it consistent with root policy.
 8. For common/commodity functionality, evaluate existing libraries before building from scratch.
 9. Do not install host-level packages unless explicitly requested by the user.
+10. Use subagents for bounded parallelizable work (especially exploration/research) to keep the main context focused; synthesize results back into the primary task thread.
+11. Default to an autonomous bug-fixing posture: implement and validate directly; ask the user only when scope is ambiguous, constraints conflict, or risk is irreversible.
+12. Apply an elegance gate before finalizing: prefer the simplest maintainable solution that a staff-level engineer would approve for clarity, testability, and long-term operability.
 
 ## Instruction layering (`AGENTS.md` first, skills second)
 1. Treat `AGENTS.md` as the default control plane for repo policy and execution behavior.
